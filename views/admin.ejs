@@ -1,0 +1,81 @@
+<%- include("header") -%>
+
+<hr>
+
+<h1><%= lang === 'ru' ? 'Админ Панель' : 'Admin Panel' %></h1>
+
+<!-- Manage Users -->
+<h2><%= lang === 'ru' ? 'Настройка Пользователей' : 'Manage Users' %></h2>
+<table border="1">
+    <tr>
+        <th><%= lang === 'ru' ? 'Имя пользователя' : 'Username' %></th>
+        <th><%= lang === 'ru' ? 'Роль' : 'Role' %></th>
+        <th><%= lang === 'ru' ? 'Действия' : 'Actions' %></th>
+    </tr>
+    <% users.forEach(user => { %>
+        <tr>
+            <td><%= user.username %></td>
+            <td><%= user.admin ? 'Admin' : 'User' %></td>
+            <td>
+                <form action="/admin/delete-user/<%= user._id %>" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('<%= lang === 'ru' ? 'Вы уверены?' : 'Are you sure?' %>')"><%= lang === 'ru' ? 'Удалить' : 'Delete' %></button>
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+<!-- Add New User -->
+<h3><%= lang === 'ru' ? 'Добавить Пользователя' : 'Add User' %></h3>
+<form action="/admin/add-user" method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <label>
+        <input type="checkbox" name="admin"> Admin
+    </label>
+    <button type="submit"><%= lang === 'ru' ? 'Добавить Пользователя' : 'Add User' %></button>
+</form>
+
+<hr>
+
+<!-- Manage Dishes -->
+<h2><%= lang === 'ru' ? 'Настройка Блюд' : 'Manage Dishes' %></h2>
+<table border="1">
+    <tr>
+        <th>Name (EN)</th>
+        <th>Name (RU)</th>
+        <th>Images</th>
+        <th>Actions</th>
+    </tr>
+    <% items.forEach(item => { %>
+        <tr>
+            <td><%= item.name_en %></td>
+            <td><%= item.name_ru %></td>
+            <td>
+                <img src="<%= item.images[0] %>" width="50">
+                <img src="<%= item.images[1] %>" width="50">
+                <img src="<%= item.images[2] %>" width="50">
+            </td>
+            <td>
+                <form action="/admin/delete/<%= item._id %>" method="POST" style="display:inline;">
+                    <button type="submit" onclick="return confirm('Are you sure?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+<!-- Add New Dish -->
+<h3><%= lang === 'ru' ? 'Добавить Блюдо' : 'Add Dish' %></h3>
+<form action="/admin/add" method="POST">
+    <input type="text" name="name_en" placeholder="Name (EN)" required>
+    <input type="text" name="name_ru" placeholder="Name (RU)" required>
+    <input type="text"  name="desc_en" placeholder="Description (EN)" required>
+    <input type="text"  name="desc_local" placeholder="Description (RU)" required>
+    <input type="text" name="img1" placeholder="Image URL 1" required>
+    <input type="text" name="img2" placeholder="Image URL 2" required>
+    <input type="text" name="img3" placeholder="Image URL 3" required>
+    <button type="submit"><%= lang === 'ru' ? 'Добавить Блюдо' : 'Add Dish' %></button>
+</form>
+
+<%- include("footer") -%>

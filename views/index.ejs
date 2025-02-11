@@ -1,0 +1,48 @@
+<%- include("header") -%>
+
+<hr>
+<h1><%= lang === 'ru' ? 'Главная страница' : 'Main page' %></h1>
+
+<h2><%= lang === 'ru' ? 'Случайное изображение еды' : 'Random Food Image' %></h2>
+<button id="get-food-image"><%= lang === 'ru' ? 'Получить изображение еды' : 'Get Food' %></button>
+<br><br>
+<img id="food-image" src="/images/PH.png" alt="<%= lang === 'ru' ? 'Случайное изображение еды' : 'Random Food Image' %>" width="300">
+
+<h2><%= lang === 'ru' ? 'Поиск рецептов' : 'Recipe Search' %></h2>
+<form action="/search" method="POST">
+	<input type="text" name="query" placeholder="<%= lang === 'ru' ? 'Введите название рецепта' : 'Enter a recipe name' %>" required>
+	<button type="submit"><%= lang === 'ru' ? 'Искать' : 'Search' %></button>
+</form>
+
+<% if (typeof recipes !== 'undefined') { %>
+<h2><%= lang === 'ru' ? 'Результаты поиска:' : 'Search Results:' %></h2>
+<ul>
+	<% recipes.forEach(recipe => { %>
+		<li>
+			<h3><%= recipe.recipe_name %></h3>
+			<p><%= recipe.recipe_description %></p>
+			<a href="<%= recipe.recipe_url %>" target="_blank"><%= lang === 'ru' ? 'Посмотреть рецепт' : 'View Recipe' %></a>
+		</li>
+	<% }) %>
+</ul>
+<% } %>
+
+<h2><%= lang === 'ru' ? 'Блюда' : 'Dishes' %></h2>
+<div class="items-container">
+	<% items.forEach(item => { %>
+		<div class="item-card">
+			<div class="carousel">
+				<img src="<%= item.images[0] %>" class="carousel-image">
+				<img src="<%= item.images[1] %>" class="carousel-image">
+				<img src="<%= item.images[2] %>" class="carousel-image">
+			</div>
+			<h3><%= lang === 'ru' ? item.name_ru : item.name_en %><h3>
+			<p><%= lang === 'ru' ? item.desc_local : item.desc_en %></p>
+		</div>
+	<% }) %>
+</div>
+
+<script src="/js/carousel.js"></script>
+<script src="/js/foodish.js"></script>
+
+<%- include("footer") -%>

@@ -1,0 +1,16 @@
+<%- include("header") -%>
+
+<hr>
+
+<h1><%= lang === 'ru' ? 'Вход' : 'Login' %></h1>
+
+<form action="/login" method="post">
+    <input type="text" name="username" placeholder="<%= lang === 'ru' ? 'Имя пользователя' : 'Username' %>" required>
+    <input type="password" name="password" placeholder="<%= lang === 'ru' ? 'Пароль' : 'Password' %>" required>
+    <button type="submit"><%= lang === 'ru' ? 'Войти' : 'Login' %></button>
+</form>
+
+<p><%= message || "" %></p>
+
+	
+<%- include("footer") -%>

@@ -1,0 +1,21 @@
+<%- include("header") -%>
+
+<hr>
+
+<h1><%= lang === 'ru' ? 'Тест по еде' : 'Food quiz' %></h1>
+
+<form action="/quiz/submit" method="post">
+    <% questions.forEach((q, index) => { %>
+        <p><%= index + 1 %>. <%= q.question %></p>
+        <% q.options.forEach(opt => { %>
+            <input type="radio" name="<%= q._id %>" value="<%= opt %>"> <%= opt %><br>
+        <% }) %>
+    <% }) %>
+    <button type="submit">Submit</button>
+</form>
+
+<p>Time Left: <span id="timer" data-time="<%= timeLimit %>"></span></p>
+
+<script src="/js/timer.js"></script>
+
+<%- include("footer") -%>

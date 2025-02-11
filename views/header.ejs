@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="<%= lang %>">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Cooking Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/index"><%= lang === 'ru' ? 'Главная' : 'Home' %></a>
+        <% if (!session.user) { %>
+            <a href="/login"><%= lang === 'ru' ? 'Вход' : 'Login' %></a>
+            <a href="/register"><%= lang === 'ru' ? 'Регистрация' : 'Register' %></a>
+        <% } else { %>
+            <a href="/logout"><%= lang === 'ru' ? 'Выход' : 'Logout' %></a>
+        <% } %>
+        <% if (session.user && session.user.admin) { %>
+            <a href="/admin"><%= lang === 'ru' ? 'Админ Панель' : 'Admin' %></a>
+        <% } %>
+        <a href="/quiz"><%= lang === 'ru' ? 'Бонус' : 'Bonus' %></a>
+        <select id="languageSwitcher">
+            <option value="en" <%= lang === 'en' ? 'selected' : '' %>>English</option>
+            <option value="ru" <%= lang === 'ru' ? 'selected' : '' %>>Русский</option>
+        </select>
+    </nav>
+
+   <script src="/js/localization.js"></script

@@ -1,0 +1,12 @@
+<%- include("header") -%>
+
+<h2>Quiz Results</h2>
+<p>You scored <%= score %> out of <%= total %>.</p>
+
+<h2>Share Your Score!</h2>
+<a href="https://twitter.com/intent/tweet?text=I+scored+<%= score %>+out+of+<%= total %>+on+this+cooking+quiz!">Share on Twitter</a>
+<a href="https://www.facebook.com/sharer/sharer.php?u=https://yourwebsite.com/quiz&quote=I+scored+<%= score %>+out+of+<%= total %>+on+this+cooking+quiz!">Share on Facebook</a>
+
+<a href="/quiz">Try Again</a>
+
+<%- include("footer") -%>
